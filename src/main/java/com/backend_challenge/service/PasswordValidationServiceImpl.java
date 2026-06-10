@@ -13,8 +13,16 @@ public class PasswordValidationServiceImpl implements PasswordValidationService 
 
     @Override
     public boolean isValid(PasswordRequest request) {
-        validateInformedPassword(request.password());
-        validatePasswordLength(request.password());
+
+        if (request == null || request.password() == null) {
+            return false;
+        }
+
+        String password = request.password();
+
+        if (password.isBlank() || password.length() < 9) {
+            return false;
+        }
 
         boolean hasUpper = false;
         boolean hasLower = false;
@@ -49,17 +57,5 @@ public class PasswordValidationServiceImpl implements PasswordValidationService 
                 && hasLower
                 && hasDigit
                 && hasSpecial;
-    }
-
-    private void validatePasswordLength(String password) {
-        if (password.length() < 9) {
-            throw new IllegalArgumentException("Password must be at least 9 characters long.");
-        }
-    }
-
-    private void validateInformedPassword(String password) {
-        if (isEmpty(password)) {
-            throw new IllegalArgumentException("Password must be informed.");
-        }
     }
 }
