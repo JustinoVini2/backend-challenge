@@ -5,7 +5,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/api/password-validation")
+@RequestMapping("/api/password")
 public class PasswordValidationController {
 
     private final PasswordValidationService passwordValidationService;
